@@ -6,7 +6,6 @@ import java.util.List;
 public class ListaPacientes {
     private NodoPaciente cabeza;
 
-    // Método para agregar un paciente a la lista
     public void agregarPaciente(Paciente paciente) {
         NodoPaciente nuevo = new NodoPaciente(paciente);
         if (cabeza == null) {
@@ -17,7 +16,6 @@ public class ListaPacientes {
         }
     }
 
-    // Método para obtener todos los pacientes en una lista
     public List<Paciente> obtenerPacientes() {
         List<Paciente> pacientes = new ArrayList<>();
         NodoPaciente temp = cabeza;
@@ -28,7 +26,6 @@ public class ListaPacientes {
         return pacientes;
     }
 
-    // Método para buscar un paciente por su ID
     public Paciente buscarPaciente(int id) {
         NodoPaciente temp = cabeza;
         while (temp != null) {
@@ -40,7 +37,6 @@ public class ListaPacientes {
         return null;  // Devuelve null si no se encuentra el paciente
     }
 
-    // Método para eliminar un paciente por su ID
     public boolean eliminarPaciente(int id) {
         if (cabeza == null) return false;
 

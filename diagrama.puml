@@ -1,0 +1,46 @@
+@startuml
+class Paciente {
+    - String nombre
+    - int id
+    - int edad
+    - String clinicaDondeRecibeAtencion
+    + Paciente(String, int, int, String)
+    + getNombre(): String
+    + setNombre(String): void
+    + getId(): int
+    + setId(int): void
+    + getEdad(): int
+    + setEdad(int): void
+    + getClinicaDondeRecibeAtencion(): String
+    + setClinicaDondeRecibeAtencion(String): void
+}
+
+class NodoPaciente {
+    - Paciente paciente
+    - NodoPaciente siguiente
+    + NodoPaciente(Paciente)
+}
+
+class ListaPacientes {
+    - NodoPaciente cabeza
+    + agregarPaciente(Paciente): void
+    + obtenerPacientes(): List<Paciente>
+    + buscarPaciente(int): Paciente
+    + eliminarPaciente(int): boolean
+}
+
+class VentanaPrincipal {
+    + VentanaPrincipal()
+}
+
+class FormularioPaciente {
+    + FormularioPaciente()
+}
+
+Paciente "1" --> "1" NodoPaciente : Contiene
+NodoPaciente "1" --> "1" NodoPaciente : Apunta a
+ListaPacientes "1" --> "*" NodoPaciente : Maneja
+VentanaPrincipal ..> ListaPacientes : Usa
+FormularioPaciente ..> ListaPacientes : Usa
+
+@enduml
