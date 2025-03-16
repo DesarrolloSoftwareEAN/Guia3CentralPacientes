@@ -11,13 +11,13 @@ public class FormularioPaciente extends JFrame {
     private JTextField txtNombre, txtId, txtEdad, txtClinica;
     private ListaPacientes listaPacientes;
 
-    public FormularioPaciente() {
+    public FormularioPaciente(ListaPacientes listaPacientes) {
+        this.listaPacientes = listaPacientes;  // Ahora usa la misma lista global
+
         setTitle("Registrar Paciente");
         setSize(300, 250);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        listaPacientes = new ListaPacientes(); // Instancia de la lista
 
         JPanel panel = new JPanel(new GridLayout(5, 2));
 
@@ -38,14 +38,9 @@ public class FormularioPaciente extends JFrame {
         panel.add(txtClinica);
 
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                guardarPaciente();
-            }
-        });
-
+        btnGuardar.addActionListener(e -> guardarPaciente());
         panel.add(btnGuardar);
+
         add(panel);
     }
 
@@ -55,6 +50,11 @@ public class FormularioPaciente extends JFrame {
             int id = Integer.parseInt(txtId.getText());
             int edad = Integer.parseInt(txtEdad.getText());
             String clinica = txtClinica.getText();
+
+            if (listaPacientes.buscarPaciente(id) != null) {
+                JOptionPane.showMessageDialog(this, "Error: El ID ya está registrado.");
+                return;
+            }
 
             Paciente nuevoPaciente = new Paciente(nombre, id, edad, clinica);
             listaPacientes.agregarPaciente(nuevoPaciente);
