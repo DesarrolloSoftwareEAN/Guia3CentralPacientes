@@ -1,33 +1,23 @@
-package pacientes;
+package modelos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaPacientes {
-    private nodoPaciente cabeza;
+    private NodoPaciente cabeza;
 
     public void agregarPaciente(Paciente paciente) {
-        nodoPaciente nuevo = new nodoPaciente(paciente);
+        NodoPaciente nuevo = new NodoPaciente(paciente);
         if (cabeza == null) {
             cabeza = nuevo;
-        }else {
+        } else {
             nuevo.siguiente = cabeza;
             cabeza = nuevo;
-
         }
     }
 
-    public void mostrarPacientes() {
-        nodoPaciente temp = cabeza;
-        if (temp == null) {
-            System.out.println("no se encontraron pacientes registrados en la base de datos");
-            return;
-        }
-
-        while (temp != null) {
-            System.out.println(temp.paciente);
-            temp = temp.siguiente;
-        }
-    }
     public Paciente buscarPaciente(int id) {
-        nodoPaciente temp = cabeza;
+        NodoPaciente temp = cabeza;
         while (temp != null) {
             if (temp.paciente.getId() == id) {
                 return temp.paciente;
@@ -36,13 +26,14 @@ public class ListaPacientes {
         }
         return null;
     }
+
     public boolean eliminarPaciente(int id) {
         if (cabeza == null) return false;
         if (cabeza.paciente.getId() == id) {
             cabeza = cabeza.siguiente;
             return true;
         }
-        nodoPaciente temp = cabeza;
+        NodoPaciente temp = cabeza;
         while (temp.siguiente != null) {
             if (temp.siguiente.paciente.getId() == id) {
                 temp.siguiente = temp.siguiente.siguiente;
@@ -52,7 +43,14 @@ public class ListaPacientes {
         }
         return false;
     }
+
+    public List<Paciente> obtenerListaPacientes() {
+        List<Paciente> lista = new ArrayList<>();
+        NodoPaciente temp = cabeza;
+        while (temp != null) {
+            lista.add(temp.paciente);
+            temp = temp.siguiente;
+        }
+        return lista;
+    }
 }
-
-
-
