@@ -62,7 +62,7 @@ Central_De_Pacientes/
 5. Abre un **Pull Request**.
 
 ## Autor
-- **[Tu Nombre]** - Desarrollo y documentación.
+- **[Miguel Antonio Moscote]** - Desarrollo y documentación.
 
 ## Licencia
 Este proyecto está bajo la licencia **MIT**.
